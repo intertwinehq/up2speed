@@ -1,4 +1,4 @@
-import type { RedditItem } from '../types'
+import type { RedditItem } from '../types.js'
 
 // Reddit combined subreddit feed: single request, combine subs with +
 const SUBS = 'programming+machinelearning+webdev+devops+rust+golang'

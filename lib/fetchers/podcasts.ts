@@ -1,5 +1,5 @@
 import { XMLParser } from 'fast-xml-parser'
-import type { PodcastEpisode, PodcastFeed } from '../types'
+import type { PodcastEpisode, PodcastFeed } from '../types.js'
 
 export const DEFAULT_FEEDS: PodcastFeed[] = [
   { name: 'The Changelog', feedUrl: 'https://changelog.com/podcast/feed' },

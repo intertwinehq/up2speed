@@ -1,4 +1,4 @@
-import type { GitHubItem } from '../types'
+import type { GitHubItem } from '../types.js'
 
 const LIMIT = 25
 

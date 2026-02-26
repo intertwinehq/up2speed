@@ -1,4 +1,4 @@
-import type { LobstersItem } from '../types'
+import type { LobstersItem } from '../types.js'
 
 const LIMIT = 25
 

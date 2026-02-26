@@ -1,4 +1,4 @@
-import type { DevtoItem } from '../types'
+import type { DevtoItem } from '../types.js'
 
 export async function fetchDevto(): Promise<DevtoItem[]> {
   const res = await fetch('https://dev.to/api/articles?per_page=25&top=7', {

@@ -1,4 +1,4 @@
-import type { HNItem } from '../types'
+import type { HNItem } from '../types.js'
 
 // Algolia HN API: single request, returns full story objects, has CORS headers.
 // No need to fetch 30 individual stories from Firebase.

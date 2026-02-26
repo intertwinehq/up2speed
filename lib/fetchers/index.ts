@@ -1,11 +1,11 @@
-import type { Sources, SourceStatus, SourceType } from '../types'
-import { fetchHN } from './hn'
-import { fetchGitHub } from './github'
-import { fetchReddit } from './reddit'
-import { fetchDevto } from './devto'
-import { fetchArxiv } from './arxiv'
-import { fetchLobsters } from './lobsters'
-import { fetchPodcasts } from './podcasts'
+import type { Sources, SourceStatus, SourceType } from '../types.js'
+import { fetchHN } from './hn.js'
+import { fetchGitHub } from './github.js'
+import { fetchReddit } from './reddit.js'
+import { fetchDevto } from './devto.js'
+import { fetchArxiv } from './arxiv.js'
+import { fetchLobsters } from './lobsters.js'
+import { fetchPodcasts } from './podcasts.js'
 
 export interface FetchResult {
   sources: Sources

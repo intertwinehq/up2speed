@@ -1,4 +1,4 @@
-import type { Tag } from './types'
+import type { Tag } from './types.js'
 
 export const DEFAULT_TAGS: Tag[] = [
   {

@@ -1,5 +1,5 @@
 import { XMLParser } from 'fast-xml-parser'
-import type { ArxivItem } from '../types'
+import type { ArxivItem } from '../types.js'
 
 // ArXiv RSS feed: single request, combines categories with +
 const FEED_URL = 'https://rss.arxiv.org/rss/cs.AI+cs.LG+cs.CL'

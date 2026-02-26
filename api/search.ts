@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { fetchAllSources, SOURCE_META } from '../lib'
-import type { SourceType } from '../lib'
+import { fetchAllSources, SOURCE_META } from '../lib/index.js'
+import type { SourceType } from '../lib/index.js'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const q = ((req.query.q as string) ?? '').toLowerCase().trim()

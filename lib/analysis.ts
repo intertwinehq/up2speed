@@ -1,4 +1,4 @@
-import type { Sources, TrendItem } from './types'
+import type { Sources, TrendItem } from './types.js'
 
 const STOP_WORDS = new Set(
   'the a an and or but in on at to for of is it this that with from by as are was ' +
