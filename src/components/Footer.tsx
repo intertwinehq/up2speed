@@ -6,7 +6,7 @@ export function Footer() {
     <footer className="footer">
       <div className="footer-inner">
         <div className="footer-brand">
-          Up<span className="accent">2</span>Speed
+          <span className="logo">Up<span className="accent">2</span>Speed</span>
           <span className="footer-sep">&middot;</span>
           <span className="footer-tagline">Open source tech intelligence</span>
         </div>

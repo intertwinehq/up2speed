@@ -1,12 +1,12 @@
 import type { RedditItem } from '../types.js'
 
-// Reddit combined subreddit feed: single request, combine subs with +
+// Use old.reddit.com — www.reddit.com blocks .json from cloud/serverless IPs.
 const SUBS = 'programming+machinelearning+webdev+devops+rust+golang'
 const LIMIT = 25
 
 export async function fetchReddit(): Promise<RedditItem[]> {
   const res = await fetch(
-    `https://www.reddit.com/r/${SUBS}/hot.json?limit=${LIMIT}`,
+    `https://old.reddit.com/r/${SUBS}/hot.json?limit=${LIMIT}`,
     {
       headers: { 'User-Agent': 'Up2Speed/1.0' },
       signal: AbortSignal.timeout(5000),
