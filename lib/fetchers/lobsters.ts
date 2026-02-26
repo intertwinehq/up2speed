@@ -4,7 +4,7 @@ const LIMIT = 25
 
 export async function fetchLobsters(): Promise<LobstersItem[]> {
   const res = await fetch('https://lobste.rs/hottest.json', {
-    signal: AbortSignal.timeout(10000),
+    signal: AbortSignal.timeout(5000),
   })
   const stories: any[] = await res.json()
 

@@ -8,7 +8,7 @@ export async function fetchGitHub(): Promise<GitHubItem[]> {
 
   const res = await fetch(url, {
     headers: { Accept: 'application/vnd.github.v3+json' },
-    signal: AbortSignal.timeout(10000),
+    signal: AbortSignal.timeout(5000),
   })
   const data = await res.json()
 

@@ -6,6 +6,7 @@ export default async function handler(_req: VercelRequest, res: VercelResponse) 
     const { sources, status } = await fetchAllSources()
     const trends = analyzeTrends(sources)
 
+    // CDN caches for 5 min, serves stale for 24h while revalidating
     res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=86400')
     res.status(200).json({
       sources,

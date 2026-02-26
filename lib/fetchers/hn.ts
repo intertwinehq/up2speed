@@ -1,37 +1,25 @@
 import type { HNItem } from '../types'
 
-const API = 'https://hacker-news.firebaseio.com/v0'
-const LIMIT = 30
-const BATCH = 10
-
-async function fetchStory(id: number): Promise<HNItem | null> {
-  try {
-    const res = await fetch(`${API}/item/${id}.json`, { signal: AbortSignal.timeout(5000) })
-    const it = await res.json()
-    if (!it?.title) return null
-    return {
-      title: it.title,
-      url: it.url ?? `https://news.ycombinator.com/item?id=${id}`,
-      score: it.score ?? 0,
-      comments: it.descendants ?? 0,
-      by: it.by ?? '',
-      time: it.time ?? 0,
-      id,
-      discuss_url: `https://news.ycombinator.com/item?id=${id}`,
-    }
-  } catch {
-    return null
-  }
-}
+// Algolia HN API: single request, returns full story objects, has CORS headers.
+// No need to fetch 30 individual stories from Firebase.
+const API = 'https://hn.algolia.com/api/v1/search'
+const LIMIT = 25
 
 export async function fetchHN(): Promise<HNItem[]> {
-  const res = await fetch(`${API}/topstories.json`, { signal: AbortSignal.timeout(10000) })
-  const ids: number[] = (await res.json()).slice(0, LIMIT)
+  const res = await fetch(
+    `${API}?tags=front_page&hitsPerPage=${LIMIT}`,
+    { signal: AbortSignal.timeout(5000) }
+  )
+  const data = await res.json()
 
-  const items: HNItem[] = []
-  for (let i = 0; i < ids.length; i += BATCH) {
-    const batch = await Promise.all(ids.slice(i, i + BATCH).map(fetchStory))
-    items.push(...batch.filter((x): x is HNItem => x !== null))
-  }
-  return items
+  return (data.hits ?? []).map((hit: any): HNItem => ({
+    title: hit.title ?? '',
+    url: hit.url ?? `https://news.ycombinator.com/item?id=${hit.objectID}`,
+    score: hit.points ?? 0,
+    comments: hit.num_comments ?? 0,
+    by: hit.author ?? '',
+    time: Math.floor(new Date(hit.created_at).getTime() / 1000),
+    id: Number(hit.objectID) || 0,
+    discuss_url: `https://news.ycombinator.com/item?id=${hit.objectID}`,
+  }))
 }

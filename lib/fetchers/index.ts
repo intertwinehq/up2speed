@@ -22,10 +22,25 @@ const FETCHERS: Record<SourceType, () => Promise<any[]>> = {
   podcasts: fetchPodcasts,
 }
 
+// Wrap each fetcher with its own timeout so one slow source can't stall everything
+function withTimeout<T>(fn: () => Promise<T>, ms: number): () => Promise<T> {
+  return () =>
+    Promise.race([
+      fn(),
+      new Promise<T>((_, reject) =>
+        setTimeout(() => reject(new Error(`Source timeout after ${ms}ms`)), ms)
+      ),
+    ])
+}
+
 export async function fetchAllSources(): Promise<FetchResult> {
   const keys = Object.keys(FETCHERS) as SourceType[]
   const start = Date.now()
-  const results = await Promise.allSettled(keys.map((k) => FETCHERS[k]()))
+
+  // 8s per source, all in parallel. Worst case: 8s total, not 8s * 7.
+  const results = await Promise.allSettled(
+    keys.map((k) => withTimeout(FETCHERS[k], 8000)())
+  )
 
   const sources: any = {}
   const status: Record<string, SourceStatus> = {}
