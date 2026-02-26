@@ -8,7 +8,7 @@ import type {
   SourceType,
   HNItem,
   GitHubItem,
-  RedditItem,
+  TechNewsItem,
   DevtoItem,
   ArxivItem,
   LobstersItem,
@@ -53,17 +53,16 @@ function GitHubRow({ item }: { item: GitHubItem }) {
   )
 }
 
-function RedditRow({ item }: { item: RedditItem }) {
+function TechNewsRow({ item }: { item: TechNewsItem }) {
   return (
     <div className="item" onClick={() => window.open(item.url, '_blank')}>
       <a className="item-title" href={item.url} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
         {item.title}
       </a>
+      {item.description && <div className="item-desc">{truncate(item.description, 120)}</div>}
       <div className="item-meta">
-        <span className="c-sub">r/{item.subreddit}</span>
-        <span className="c-score">{'\u25B2'} {fmtNum(item.score)}</span>
-        <span className="c-comments">{'\uD83D\uDCAC'} {item.comments}</span>
-        <span>{timeAgo(item.time)}</span>
+        <span className="c-sub">{item.source}</span>
+        <span>{timeAgo(item.published)}</span>
       </div>
     </div>
   )
@@ -160,9 +159,11 @@ interface SourceConfig<T> {
 const PANELS: SourceConfig<any>[] = [
   { key: 'hn', icon: 'Y', color: '#ff6600', title: 'Hacker News', Row: HNRow, getKey: (it: HNItem) => it.id },
   { key: 'github', icon: 'G', color: '#58a6ff', title: 'GitHub Trending', Row: GitHubRow, getKey: (_: GitHubItem, i: number) => i },
-  { key: 'reddit', icon: 'R', color: '#ff4500', title: 'Reddit', Row: RedditRow, getKey: (_: RedditItem, i: number) => i },
+  { key: 'wired', icon: 'W', color: '#000000', title: 'Wired', Row: TechNewsRow, getKey: (_: TechNewsItem, i: number) => i },
+  { key: 'arstechnica', icon: 'A', color: '#ff4e00', title: 'Ars Technica', Row: TechNewsRow, getKey: (_: TechNewsItem, i: number) => i },
+  { key: 'techcrunch', icon: 'T', color: '#0a9e01', title: 'TechCrunch', Row: TechNewsRow, getKey: (_: TechNewsItem, i: number) => i },
   { key: 'devto', icon: 'D', color: '#3b49df', title: 'Dev.to', Row: DevtoRow, getKey: (_: DevtoItem, i: number) => i },
-  { key: 'arxiv', icon: 'A', color: '#b31b1b', title: 'ArXiv AI/ML', Row: ArxivRow, getKey: (_: ArxivItem, i: number) => i },
+  { key: 'arxiv', icon: 'X', color: '#b31b1b', title: 'ArXiv AI/ML', Row: ArxivRow, getKey: (_: ArxivItem, i: number) => i },
   { key: 'lobsters', icon: 'L', color: '#ac130d', title: 'Lobsters', Row: LobstersRow, getKey: (_: LobstersItem, i: number) => i },
 ]
 

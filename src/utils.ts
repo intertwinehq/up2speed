@@ -31,10 +31,12 @@ export function truncate(s: string | undefined, len: number): string {
 export function getItemTimestamp(item: any, source: string): number {
   switch (source) {
     case 'hn':
-    case 'reddit':
       return item.time > 1e12 ? item.time : item.time * 1000
     case 'github':
       return new Date(item.created).getTime()
+    case 'wired':
+    case 'arstechnica':
+    case 'techcrunch':
     case 'devto':
     case 'arxiv':
     case 'podcasts':
@@ -69,7 +71,7 @@ export function getItemText(item: any): string {
     ...(item.tags ?? []),
     ...(item.topics ?? []),
     ...(item.categories ?? []),
-    item.subreddit ?? '',
+    item.source ?? '',
     item.language ?? '',
   ].join(' ')
 }

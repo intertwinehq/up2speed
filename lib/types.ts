@@ -1,6 +1,6 @@
 // ─── Source Types ───────────────────────────────────────────────
 
-export type SourceType = 'hn' | 'github' | 'reddit' | 'devto' | 'arxiv' | 'lobsters' | 'podcasts'
+export type SourceType = 'hn' | 'github' | 'wired' | 'arstechnica' | 'techcrunch' | 'devto' | 'arxiv' | 'lobsters' | 'podcasts'
 
 export type TimeRange = '24h' | '7d' | '14d' | '30d'
 
@@ -26,13 +26,12 @@ export interface GitHubItem {
   topics: string[]
 }
 
-export interface RedditItem {
+export interface TechNewsItem {
   title: string
   url: string
-  score: number
-  comments: number
-  subreddit: string
-  time: number
+  source: string
+  published: string
+  description: string
 }
 
 export interface DevtoItem {
@@ -126,7 +125,9 @@ export interface SourceMeta {
 export interface Sources {
   hn: HNItem[]
   github: GitHubItem[]
-  reddit: RedditItem[]
+  wired: TechNewsItem[]
+  arstechnica: TechNewsItem[]
+  techcrunch: TechNewsItem[]
   devto: DevtoItem[]
   arxiv: ArxivItem[]
   lobsters: LobstersItem[]
@@ -166,9 +167,11 @@ export interface SearchData {
 export const SOURCE_META: Record<SourceType, SourceMeta> = {
   hn:       { label: 'Hacker News',     icon: 'Y', color: '#ff6600' },
   github:   { label: 'GitHub Trending', icon: 'G', color: '#58a6ff' },
-  reddit:   { label: 'Reddit',          icon: 'R', color: '#ff4500' },
+  wired:       { label: 'Wired',           icon: 'W', color: '#000000' },
+  arstechnica: { label: 'Ars Technica',   icon: 'A', color: '#ff4e00' },
+  techcrunch:  { label: 'TechCrunch',     icon: 'T', color: '#0a9e01' },
   devto:    { label: 'Dev.to',          icon: 'D', color: '#3b49df' },
-  arxiv:    { label: 'ArXiv AI/ML',     icon: 'A', color: '#b31b1b' },
+  arxiv:    { label: 'ArXiv AI/ML',     icon: 'X', color: '#b31b1b' },
   lobsters: { label: 'Lobsters',        icon: 'L', color: '#ac130d' },
   podcasts: { label: 'Podcasts',        icon: 'P', color: '#8b5cf6' },
 }

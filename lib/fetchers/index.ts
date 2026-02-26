@@ -1,7 +1,7 @@
 import type { Sources, SourceStatus, SourceType } from '../types.js'
 import { fetchHN } from './hn.js'
 import { fetchGitHub } from './github.js'
-import { fetchReddit } from './reddit.js'
+import { fetchWired, fetchArsTechnica, fetchTechCrunch } from './technews.js'
 import { fetchDevto } from './devto.js'
 import { fetchArxiv } from './arxiv.js'
 import { fetchLobsters } from './lobsters.js'
@@ -15,7 +15,9 @@ export interface FetchResult {
 const FETCHERS: Record<SourceType, () => Promise<any[]>> = {
   hn: fetchHN,
   github: fetchGitHub,
-  reddit: fetchReddit,
+  wired: fetchWired,
+  arstechnica: fetchArsTechnica,
+  techcrunch: fetchTechCrunch,
   devto: fetchDevto,
   arxiv: fetchArxiv,
   lobsters: fetchLobsters,

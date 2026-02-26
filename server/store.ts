@@ -3,7 +3,7 @@ import type { AppData, SourceStatus, SourceType } from '../lib'
 
 export class DataStore {
   private data: AppData = {
-    sources: { hn: [], github: [], reddit: [], devto: [], arxiv: [], lobsters: [], podcasts: [] },
+    sources: { hn: [], github: [], wired: [], arstechnica: [], techcrunch: [], devto: [], arxiv: [], lobsters: [], podcasts: [] },
     trends: [],
     status: {},
     source_meta: SOURCE_META,
